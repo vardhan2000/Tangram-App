@@ -1,17 +1,17 @@
-import { Scene, Triangle, WebGLRenderer, Shader } from './lib/threeD.js';
+import { Scene, Triangle, Square, WebGLRenderer, Shader } from './lib/threeD.js';
 import {vertexShaderSrc} from './shaders/vertex.js';
 import {fragmentShaderSrc} from './shaders/fragment.js';
 
 const scene = new Scene();
 
 const triangle1 = new Triangle(0,0,[1,0.647,0,1]);
-const triangle2 = new Triangle(0,0,[0,1,0,1]);
+const square1 = new Square(0,0,[0,1,0,1]);
 
 // const triangle3 = new Triangle(0.5,0.5,[255,0,0,1]);
 // const triangle4 = new Triangle(0.5,-0.5,[0,0,0,1]);
 
 scene.add(triangle1);
-scene.add(triangle2);
+scene.add(square1);
 
 // scene.add(triangle3);
 // scene.add(triangle4);
