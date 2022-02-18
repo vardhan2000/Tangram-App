@@ -4,13 +4,21 @@ import {fragmentShaderSrc} from './shaders/fragment.js';
 
 const scene = new Scene();
 
-const t1 = new Triangle(0,0,[1,0.647,0,1]);
-const s1 = new Square(0,0,[0,1,0,1]);
-const p1 = new Parallelogram(0,0,[0,0,1,1]);
+const t1 = new Triangle(0,0,[1,0.647,0,1]); // orange
+const t2 = new Triangle(0,0,[0,0,1,1]); // blue
+const t3 = new Triangle(0,0,[1, 0.8, 0.0,1]); // yellow
+const t4 = new Triangle(0,0,[0,1,0,1]); // green
+const t5 = new Triangle(0,0,[0.039, 0.796, 0.933,1]); // light blue
+const s1 = new Square(0,0,[1,0,0,1]);
+const p1 = new Parallelogram(0,0,[1,0.062,0.94,1]);
 // const triangle3 = new Triangle(0.5,0.5,[255,0,0,1]);
 // const triangle4 = new Triangle(0.5,-0.5,[0,0,0,1]);
 
 scene.add(t1);
+scene.add(t2);
+scene.add(t3);
+scene.add(t4);
+scene.add(t5);
 scene.add(s1);
 scene.add(p1);
 
@@ -29,9 +37,9 @@ let mode = 0;
 let prims = scene.getPrimitives();
 let count = -1;
 let start = 0;
-let move_by = 0.1;
-let rotate_by = 0.1;
-let scale_by = 1.2;
+let move_by = 0.05;
+let rotate_by = 0.05;
+let scale_by = 1.05;
 
 window.onload = () => {
     renderer.getDomElement().addEventListener('click', (event) => {
