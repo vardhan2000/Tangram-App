@@ -142,6 +142,8 @@ let move_by = 0.02;
 let rotate_by = 0.02;
 let scale_by = 1.05;
 
+console.log("mode = ", mode);
+
 window.onload = () => {
     renderer2.getDomElement().addEventListener('click', (event) => {
         
