@@ -92,13 +92,6 @@ const t4_ = new Triangle(0,0,[0.039, 0.796, 0.933,1]); // light blue
 const s1_ = new Square(0,0,[1,0,0,1]); // red
 const p1_ = new Parallelogram(0,0,[1,0.062,0.94,1]); // pink
 
-scene2.add(t0_);
-scene2.add(t1_);
-scene2.add(t2_);
-scene2.add(t3_);
-scene2.add(t4_);
-scene2.add(s1_);
-scene2.add(p1_);
 
 t0_.transform.setScale([3.071523, 3.071523,1]);
 t1_.transform.setScale([3.071523, 3.071523,1]);
@@ -108,13 +101,17 @@ t4_.transform.setScale([1.477455, 1.477455,1]);
 s1_.transform.setScale([1.6289, 1.6289,1]);
 p1_.transform.setScale([0.907, 0.907,1]);
 
-let prims = scene2.getPrimitives();
+scene2.add(t0_);
+scene2.add(t1_);
+scene2.add(t2_);
+scene2.add(t3_);
+scene2.add(t4_);
+scene2.add(s1_);
+scene2.add(p1_);
 
-// let rand_angle = 0;
-// let rand_x = 0;
-// let rand_y = 0;
+let primitives = scene2.getPrimitives();
 
-for(let i=0; i<prims.length; i++){
+for(let i=0; i<primitives.length; i++){
     let rand_angle = 0;
     let rand_x = 0;
     let rand_y = 0;
@@ -123,10 +120,10 @@ for(let i=0; i<prims.length; i++){
     rand_x = Math.random()-0.5;
     rand_y = Math.random()-0.5;
     
-    prims[i].setCenterX(rand_x);
-    prims[i].setCenterY(rand_y);
-    prims[i].transform.setTranslate([rand_x,rand_y,0]);
-    prims[i].transform.setRotationAngle(rand_angle);
+    primitives[i].setCenterX(rand_x);
+    primitives[i].setCenterY(rand_y);
+    primitives[i].transform.setTranslate([rand_x,rand_y,0]);
+    primitives[i].transform.setRotationAngle(rand_angle);
 }
 
 
@@ -158,14 +155,14 @@ window.onload = () => {
             const position = new Float32Array([clipCoordinates[0], clipCoordinates[1]]);
             console.log("positionX = ", position[0], "; positionY = ", position[1]);
 
-            for (let i = start; i < prims.length; i++) {
-                let sum = ((position[0] - prims[i].getCenterX()) ** 2 + (position[1] - prims[i].getCenterY()) ** 2) ** (1 / 2);
+            for (let i = start; i < primitives.length; i++) {
+                let sum = ((position[0] - primitives[i].getCenterX()) ** 2 + (position[1] - primitives[i].getCenterY()) ** 2) ** (1 / 2);
                 if (sum < dist) {
                     dist = sum;
                     count = i;
                 }
             }
-            console.log(prims[count].getCenterX());
+            console.log(primitives[count].getCenterX());
         }
         else { }
     });
@@ -173,12 +170,48 @@ window.onload = () => {
     window.addEventListener('keydown', function (event) {
         console.log("Key pressed = ", event.key);
         if(event.key=="m"){
+            if(mode==2){
+                scene2.setPrimitives([]);
+            } else if(mode==3){
+                t0_.transform.setScale([3.071523, 3.071523,1]);
+                t1_.transform.setScale([3.071523, 3.071523,1]);
+                t2_.transform.setScale([1.477455, 1.477455,1]);
+                t3_.transform.setScale([2.07893, 2.07893,1]);
+                t4_.transform.setScale([1.477455, 1.477455,1]);
+                s1_.transform.setScale([1.6289, 1.6289,1]);
+                p1_.transform.setScale([0.907, 0.907,1]);
+                scene2.add(t0_);
+                scene2.add(t1_);
+                scene2.add(t2_);
+                scene2.add(t3_);
+                scene2.add(t4_);
+                scene2.add(s1_);
+                scene2.add(p1_);
+
+                primitives = scene2.getPrimitives();
+                for(let i=0; i<primitives.length; i++){
+                    let rand_angle = 0;
+                    let rand_x = 0;
+                    let rand_y = 0;
+                    
+                    rand_angle = Math.random()*6.28;
+                    rand_x = Math.random()-0.5;
+                    rand_y = Math.random()-0.5;
+                    
+                    primitives[i].setCenterX(rand_x);
+                    primitives[i].setCenterY(rand_y);
+                    primitives[i].transform.setTranslate([rand_x,rand_y,0]);
+                    primitives[i].transform.setRotationAngle(rand_angle);
+                    
+                }
+            }
+
             mode = (mode += 1) % 4;
             console.log("mode = ",mode);
         }
         else if(event.key == "(" || event.key == ")"){
             if(mode == 1){
-                prims[count].rotate_shape(event.key,rotate_by);
+                primitives[count].rotate_shape(event.key,rotate_by);
 
             } else if(mode == 2) {
                 scene2.rotate_shape(event.key,rotate_by);
@@ -186,14 +219,14 @@ window.onload = () => {
         }
         else if(event.key == "+" || event.key=="-"){
             if(mode == 1){
-                prims[count].scale_shape(event.key,scale_by);
+                primitives[count].scale_shape(event.key,scale_by);
             } else if(mode == 2){
                 scene2.scale_shape(event.key, scale_by);
             }
         }
         else{
             if(mode==1){
-                prims[count].translate_shape(event.key,move_by);
+                primitives[count].translate_shape(event.key,move_by);
             } else if(mode == 2) {
                 scene2.translate_shape(event.key,move_by);
             }
