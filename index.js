@@ -108,6 +108,27 @@ t4_.transform.setScale([1.477455, 1.477455,1]);
 s1_.transform.setScale([1.6289, 1.6289,1]);
 p1_.transform.setScale([0.907, 0.907,1]);
 
+let prims = scene2.getPrimitives();
+
+// let rand_angle = 0;
+// let rand_x = 0;
+// let rand_y = 0;
+
+for(let i=0; i<prims.length; i++){
+    let rand_angle = 0;
+    let rand_x = 0;
+    let rand_y = 0;
+    
+    rand_angle = Math.random()*6.28;
+    rand_x = Math.random()-0.5;
+    rand_y = Math.random()-0.5;
+    
+    prims[i].setCenterX(rand_x);
+    prims[i].setCenterY(rand_y);
+    prims[i].transform.setTranslate([rand_x,rand_y,0]);
+    prims[i].transform.setRotationAngle(rand_angle);
+}
+
 
 const renderer2 = new WebGLRenderer();
 renderer2.setSize( 500, 500 );
@@ -118,11 +139,10 @@ shader2.use();
 
 
 let mode = 0;
-let prims = scene2.getPrimitives();
 let count = -1;
 let start = 0;
-let move_by = 0.01;
-let rotate_by = 0.01;
+let move_by = 0.02;
+let rotate_by = 0.02;
 let scale_by = 1.05;
 
 window.onload = () => {
